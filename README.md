@@ -16,9 +16,8 @@ Here we will soon provide some details on how to easily use our code and data!
 
 The folder ```replicate-paper``` contains Python files and Jupyter Notebooks that we used to produce the results in our paper. 
 
-- The folder ```replicate-paper/``` contains the files for the CIFAR10, EMNIST, Pneumonia and Retinopathy.
 - The folder ```replicate-paper/mnist``` contains the files for the MNIST32 and MNIST256 tasks.
-
+- The folder ```replicate-paper/other_datasets``` contains the files for the CIFAR10, EMNIST, Pneumonia and Retinopathy.
 
 ## Citing our work
 
