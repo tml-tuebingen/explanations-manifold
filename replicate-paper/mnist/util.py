@@ -1,13 +1,7 @@
 from tqdm import tqdm
 
-import torch
-from torch.utils.data import TensorDataset
-from torchvision import transforms
-
-from PIL import Image
 import seaborn as sns
 import numpy as np
-import pickle as pkl
 
 import matplotlib.pyplot as plt
 from skimage import feature
@@ -16,9 +10,13 @@ import numpy as np
 
 from scipy.linalg import orth
 
-from captum.attr import visualization as viz
-
-from captum.attr import Saliency, IntegratedGradients, InputXGradient, NoiseTunnel
+from captum.attr import (
+    Saliency,
+    IntegratedGradients,
+    InputXGradient,
+    NoiseTunnel,
+    LayerAttribution,
+)
 
 from copy import deepcopy
 import random
@@ -106,7 +104,7 @@ def test(model, testloader, device, verbose=True):
 
 
 ###############################################################################################
-# Estimating the tangent space
+# Tangent space
 ###############################################################################################
 
 
@@ -224,7 +222,7 @@ def tangent_space_per_pixel(tangent_space):
 
 
 ###############################################################################################
-# Compute saliency maps
+# Saliency maps
 ###############################################################################################
 
 
@@ -375,6 +373,25 @@ def smooth_input_x_gradient(model, img, std, n_samples, target=None, device="cud
     return smoothed_ixg
 
 
+def layer_grad_cam(model, img, target=None, device="cuda"):
+    model.eval()
+    if len(img.shape) == 2:  # expand to 4 dimensions
+        img = img.unsqueeze(0)
+    if len(img.shape) == 3:
+        img = img.unsqueeze(0)
+    img = img.to(device)
+    img.requires_grad_(True)
+    if img.grad is not None:
+        img.grad.zero_()
+    if target is None:  # predicted class
+        pred = model(img)
+        target = pred[0].argmax().item()
+    layer_gc = LayerGradCam(model, model.layer4[1].conv2)
+    int_grad = layer_gc.attribute(img, target)
+    int_grad = deepcopy(dcn(int_grad).squeeze())
+    return int_grad
+
+
 def compute_saliency_maps(model, inputs, targets=None, device="cuda"):
     """for a list of inputs, compute different kinds of saliency maps
 
@@ -396,7 +413,7 @@ def compute_saliency_maps(model, inputs, targets=None, device="cuda"):
 
 
 ###############################################################################################
-# Vizualization and Plotting Saliency Maps
+# Vizualization and Plotting
 ###############################################################################################
 
 
