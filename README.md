@@ -8,10 +8,15 @@
 
 This is the code repository for the CVPR 2023 [Workshop Paper](http://bit.ly/43SwwbH) "The Manifold Hypothesis for Gradient-Based Explanations" by Sebastian Bordt, Uddeshya Upadhya, Zeynep Akata, and Ulrike von Luxburg. 
 
-## Usage
+## Using the MNIST32 and MNIST256 datasets
 
-Here we will soon provide some details on how to easily use our code and data!
+We provide the MNIST32 and MNIST256 datasets [here](https://www.kaggle.com/datasets/sbordt/mnist32) and [here](https://www.kaggle.com/datasets/sbordt/mnist256). Feel free to use these datasets in your own reserach.
 
+We also provide two example notebooks that show how to use the datasets and tangent spaces: [here](https://github.com/tml-tuebingen/explanations-manifold/blob/main/examples/mnist32.ipynb) and [here](https://github.com/tml-tuebingen/explanations-manifold/blob/main/examples/mnist256.ipynb).
+
+You can use these datasets to train models and evaluate the alignment of attributions with the tangent space (or perform any other task that requires the tangent space). Note that the tangent spaces are only provided for the validation images (Certain applications might require the tangent spaces of all the training images. However, we did not require this in our research).
+
+The notebooks in ```replicate-paper/mnist``` show how the datasets were created.
 
 ## Replicating the results in our paper
 
@@ -23,7 +28,7 @@ The folder ```replicate-paper``` contains Python files and Jupyter Notebooks tha
   
 ## Compute tangent spaces and project vectors
 
-We provide the following code snippets to compute the tangent spaces of generative models and project vectors into the computed tangent spaces.
+We provide code snippets to compute the tangent spaces of generative models and project vectors into the computed tangent spaces.
 
 Compute the tangent space:
 
