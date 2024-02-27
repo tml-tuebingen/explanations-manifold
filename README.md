@@ -10,7 +10,7 @@ This is the code repository for the CVPR 2023 [Workshop Paper](http://bit.ly/43S
 
 ## Using the MNIST32 and MNIST256 datasets
 
-We provide the MNIST32 and MNIST256 datasets [here](https://www.kaggle.com/datasets/sbordt/mnist32) and [here](https://www.kaggle.com/datasets/sbordt/mnist256). Feel free to use these datasets in your own reserach.
+We provide the MNIST32 and MNIST256 datasets [here](https://www.kaggle.com/datasets/sbordt/mnist32) and [here](https://www.kaggle.com/datasets/sbordt/mnist256). You can use these datasets in your own research.
 
 We also provide two example notebooks that show how to use the datasets and tangent spaces: [here](https://github.com/tml-tuebingen/explanations-manifold/blob/main/examples/mnist32.ipynb) and [here](https://github.com/tml-tuebingen/explanations-manifold/blob/main/examples/mnist256.ipynb).
 
@@ -36,7 +36,7 @@ Compute the tangent space:
 def compute_tangent_space(model, z, device="cuda"):
     """Compute the tangent space of a generative model z->x at the given point z.
     The tangent space is spanned by the gradients of the model output with respect to the latent dimensions.
-    This function computes these gradients by backpropagaion and aggregates the results.
+    This function computes these gradients by backpropagation and aggregates the results.
 
     Parameters:
     - model (pytorch module): The generative model. A pytorch module that implements decode(z).
